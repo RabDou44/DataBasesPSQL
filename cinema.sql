@@ -41,38 +41,47 @@ CREATE TABLE Uzytkownicy (
 -- Table: koszyk
 CREATE TABLE koszyk (
     id_klienta serial  NOT NULL,
-    id_seans serial  NOT NULL
+    id_seans serial  NOT NULL,
+    ile integer
 );
 
 -- foreign keys
 -- Reference: Seans_Film (table: Seans)
+ALTER Table Seans DROP CONSTRAINT Seans_Film;
 ALTER TABLE Seans ADD CONSTRAINT Seans_Film
     FOREIGN KEY (Film_Id)
     REFERENCES Film (id)  
+    ON DELETE CASCADE
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: Seans_Sala (table: Seans)
+ALTER TABLE Seans DROP CONSTRAINT Seans_Sala;
 ALTER TABLE Seans ADD CONSTRAINT Seans_Sala
     FOREIGN KEY (nr_sali)
     REFERENCES Sala (nr)  
+    ON DELETE CASCADE
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: koszyk_Klient (table: koszyk)
+ALTER TABLE koszyk DROP CONSTRAINT koszyk_Klient;
 ALTER TABLE koszyk ADD CONSTRAINT koszyk_Klient
     FOREIGN KEY (id_klienta)
-    REFERENCES Uzytkownicy (id)  
+    REFERENCES Uzytkownicy (id) 
+    ON DELETE CASCADE 
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: koszyk_Seans (table: koszyk)
+ALTER TABLE koszyk DROP CONSTRAINT koszyk_Seans;
 ALTER TABLE koszyk ADD CONSTRAINT koszyk_Seans
     FOREIGN KEY (id_seans)
-    REFERENCES Seans (id)  
+    REFERENCES Seans (id) 
+    ON DELETE CASCADE 
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE
 ;
