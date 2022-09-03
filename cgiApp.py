@@ -205,7 +205,7 @@ def addFilm(title, duration,director, year, overview) -> bool:
         conn = connect()
         curr = conn.cursor()
         curr.execute(""" INSERT INTO Film(tytul, czas, rezyser, rok, opis) 
-                        Values('%s','%s','%s', %d, '%s' )"""%(title, duration, year, overview))
+                        Values('%s','%s', '%s', %d, '%s' )"""%(title, duration, director, year, overview))
         conn.commit()
         conn.close()
         return filmExits(title, director, year)
@@ -538,6 +538,9 @@ def testUsersAddingSignUp():
     print(isAdmin('superadmin','super'))
     # check if there's only one superadmin
 
+def testAddingFilm():
+    addFilm("test", "11:11",'test',1999, 'test')
+
 def testLoginAndSignUp():
     loginUser()
 
@@ -546,5 +549,6 @@ def testReservation():
     
 
 if __name__ == '__main__':
+    # testAddingFilm() 
     testLoginAndSignUp()
     # print(getRepertoire())
